@@ -14,8 +14,8 @@ namespace MumbleLink_CSharp_GW2
         public struct Coordinates
         {
             public double X, Y, Z;
-            public int WorldId;
-            public int MapId;
+            public Int64 WorldId;
+            public Int64 MapId;
         }
 
 
@@ -57,8 +57,8 @@ namespace MumbleLink_CSharp_GW2
                 X = l.FAvatarPosition[0] * MeterToInch, //west to east
                 Y = l.FAvatarPosition[2] * MeterToInch, //north to south
                 Z = -l.FAvatarPosition[1] * MeterToInch, //altitude
-                WorldId = BitConverter.ToInt32(l.Context, 36),
-                MapId = BitConverter.ToInt32(l.Context, 28)
+                WorldId = BitConverter.ToInt64(l.Context, 36),
+                MapId = BitConverter.ToInt64(l.Context, 28)
             };
             return coord;
         }
@@ -72,6 +72,8 @@ namespace MumbleLink_CSharp_GW2
             var identity = Read().Identity;
 
             var stop = Array.IndexOf(Read().Identity, '\0');
+
+            Console.WriteLine(identity);
 
             unsafe
             {
